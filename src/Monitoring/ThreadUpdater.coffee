@@ -99,7 +99,7 @@ ThreadUpdater =
         when 200
           g.DEAD = false
           ThreadUpdater.parse req.response.posts
-          #ThreadUpdater.setInterval()
+          ThreadUpdater.setInterval()
         when 404
           g.DEAD = true
           ThreadUpdater.set 'timer', null
@@ -120,10 +120,7 @@ ThreadUpdater =
   setInterval: ->
     i = ThreadUpdater.interval
     j = Math.min ThreadUpdater.outdateCount, 10
-    unless d.hidden
-      # Lower the max refresh rate limit on visible tabs.
-      j = Math.min j, 7
-    ThreadUpdater.seconds = Math.max i, [0, 5, 10, 15, 20, 30, 60, 90, 120, 240, 300][j]
+    ThreadUpdater.seconds = i
     ThreadUpdater.set 'timer', ThreadUpdater.seconds
     ThreadUpdater.count true
 
