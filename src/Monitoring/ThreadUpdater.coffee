@@ -82,7 +82,7 @@ ThreadUpdater =
     autoUpdate: (e) ->
       ThreadUpdater.count ThreadUpdater.isUpdating = @checked
     interval: (e) ->
-      val = Math.max 5, parseInt @value, 10
+      val = Math.max 0, parseInt @value
       ThreadUpdater.interval = @value = val
       $.cb.value.call @ if e
     load: (e) ->
@@ -99,7 +99,7 @@ ThreadUpdater =
         when 200
           g.DEAD = false
           ThreadUpdater.parse req.response.posts
-          ThreadUpdater.setInterval()
+          #ThreadUpdater.setInterval()
         when 404
           g.DEAD = true
           ThreadUpdater.set 'timer', null
